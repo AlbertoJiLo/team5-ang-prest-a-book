@@ -1,0 +1,12 @@
+.carousel-inner{
+    margin:auto;
+}
+
+#carouselExampleIndicators{
+    margin:auto;
+}
+
+.indicator{
+    border:0.13em solid black;
+    border-radius: 50px;
+}
