@@ -1,11 +1,4 @@
-.right-writing-vertical {
-
-    text-orientation: upright;
-    writing-mode: vertical-lr;
-
-}
-
-#intro {
+.intro {
 
     animation-name: appear;
     animation-duration: 0.8s;
@@ -13,7 +6,7 @@
 
 }
 
-#intro2 {
+.intro2 {
 
     animation-name: appear2;
     animation-duration: 0.8s;
@@ -50,5 +43,5 @@
     background-size: 100% 100%;
     background-repeat: no-repeat;
     width:100%;
-    height:100%;
+    height:70vh;
 }

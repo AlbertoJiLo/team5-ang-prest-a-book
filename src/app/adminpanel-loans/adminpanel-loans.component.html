@@ -1,0 +1,32 @@
+<app-adminpanel></app-adminpanel>
+
+<div class="container">
+
+    <div class="mat-elevation-z8">
+        <table mat-table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Dueño</th>
+                    <th scope="col">Arrendatario</th>
+                    <th scope="col">Control</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let prestamo of prestamos">
+
+                <tr>
+                    <th scope="row">{{prestamo.id}}</th>
+                    <td>{{prestamo.id_book.title}}</td>
+                    <td>{{prestamo.id_loaner.username}}</td>
+                    <td>{{prestamo.id_loanee.username}}</td>
+                    <td><button class="btn btn-danger">x</button></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <!-- <mat-paginator [pageSizeOptions]="[5, 25, 50]">
+        </mat-paginator> -->
+    </div>
+</div>

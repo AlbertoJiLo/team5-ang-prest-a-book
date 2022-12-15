@@ -1,0 +1,30 @@
+<app-adminpanel></app-adminpanel>
+
+<div class="container">
+
+    <div class="mat-elevation-z8">
+        <table mat-table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Control</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let usuario of usuarios">
+
+                <tr>
+                    <th scope="row">{{usuario.id}}</th>
+                    <td>{{usuario.username}}</td>
+                    <td>{{usuario.id_role.role_name}}</td>
+                    <td><button class="btn btn-danger">x</button><button class="btn btn-success">Rol</button></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <!-- <mat-paginator [pageSizeOptions]="[5, 25, 50]">
+        </mat-paginator> -->
+    </div>
+</div>
