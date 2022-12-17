@@ -8,6 +8,8 @@ import { WishesService } from '../services/wishes.service';
 import { Token } from '@angular/compiler';
 import { Wrote } from '../models/wrote.model';
 import { Users } from '../models/users.model';
+import { Wishes } from '../models/wishes.model';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-book',
@@ -27,6 +29,8 @@ export class BookComponent implements OnInit {
   book?: Books;
   id:any;
   wrote?: Wrote;
+  user?:Users;
+  wish?:Wishes;
 
   ngOnInit():void{
 
@@ -36,21 +40,34 @@ export class BookComponent implements OnInit {
 
 
     }
-    
     this.id = this.route.snapshot.paramMap.get('id');
-    this.BooksService.getById(this.id).subscribe(result => this.book = result);
-    this.WroteService.getByBook(this.id).subscribe(result => this.wrote = result);
+    this.user = this.TokenStorage.getUser();
+    this.sendRequests();
   }
 
   toWishlist():void{
-    console.log("hola");
     let user:Users = this.TokenStorage.getUser();
-    console.log(user);
     let data:any={
       id_user:user,
       id_book:this.book
     }
     this.WishesService.create(data).subscribe();
+    this.checkWishlist();
+    this.sendRequests();
+  }
 
+  checkWishlist(){
+    this.WishesService.getByUserAndBook(this.user?.id, this.id).subscribe(result => this.wish = result);
+    this.sendRequests();
+  }
+
+  deleteFromWishlist(){
+    this.WishesService.delete(this.wish?.id).subscribe();
+    this.sendRequests();
+  }
+
+  sendRequests(){
+    this.WroteService.getByBook(this.id).subscribe(result => this.wrote = result);
+    this.BooksService.getById(this.id).pipe(finalize( () => this.checkWishlist())).subscribe(result => this.book = result);
   }
 }
