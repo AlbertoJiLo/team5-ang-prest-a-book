@@ -64,8 +64,9 @@ export class LoginregisterComponent implements OnInit {
         data => {
           this.tokenStorage.saveToken(data.token);
           this.tokenStorage.saveUser(data);
+         /* this.tokenStorage.saveRole(data.role);*/
 
-         this.reloadPage();
+          this.reloadPage();
         },
         error => {
 

@@ -1,25 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Users } from '../models/users.model';
+import { Wrote } from '../models/wrote.model';
 
-const baseUrl = "https://prestabookbackend-production.up.railway.app/api/users";
+const baseUrl = "https://prestabookbackend-production.up.railway.app/api/wrote";
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class UsersService {
-
+export class WroteService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Users[]>{
-    return this.http.get<Users[]>(baseUrl);
+  getAll(): Observable<Wrote[]>{
+    return this.http.get<Wrote[]>(baseUrl);
   }
 
-  getById(id:number): Observable<Users>{
-    return this.http.get(`${baseUrl}/${id}`);
+  getById(id:number): Observable<Wrote[]>{
+    return this.http.get<Wrote[]>(`${baseUrl}/${id}`);
+  }
+
+  getByBook(id_book:number): Observable<Wrote>{
+    return this.http.get<Wrote>(`${baseUrl}/book/${id_book}`);
   }
 
   create(data:any): Observable<any>{
@@ -27,16 +29,10 @@ export class UsersService {
   }
 
   update(id:number, data: any): Observable<any>{
-    console.log(data);
     return this.http.put(`${baseUrl}/${id}`,data);
   }
 
   delete(id:number): Observable<any>{
     return this.http.delete(`${baseUrl}/${id}`);
   }
-
-  getByUsername(username:string): Observable<Users>{
-    return this.http.get(`${baseUrl}/username/${username}`);
-  }
-
 }

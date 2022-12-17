@@ -32,7 +32,7 @@ export class BooksService {
   }
 
   delete(id:number): Observable<any>{
-    return this.http.delete<any>(`${baseUrl}/${id}`);
+    return this.http.delete(`${baseUrl}/${id}`);
   }
 
   getByTitle(title:string): Observable<Books>{
@@ -41,6 +41,10 @@ export class BooksService {
 
   getByIsbn(isbn:string): Observable<Books>{
     return this.http.get(`${baseUrl}/isbn/${isbn}`);
+  }
+
+  getByOwner(id_user:number): Observable<Books[]>{
+    return this.http.get<Books[]>(`${baseUrl}/user/${id_user}`);
   }
 
 }

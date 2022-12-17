@@ -19,7 +19,19 @@
 
 .color-custom-blue {
 
-	color: #006ba6;
+	color: #006ba6 !important;
+
+}
+
+.color-custom-blue2 {
+
+	color: #68caff !important;
+
+}
+
+.color-custom-blue2:hover {
+
+	color: #2cb5ff !important;
 
 }
 
@@ -38,5 +50,31 @@
 .bg-custom-orange {
 
 	background-color: #dcab6b;
+
+}
+
+.color-custom-pink {
+
+	color: #e20074 !important;
+
+}
+
+.dropdown-menu[data-bs-popper] {
+
+	right: 1%;
+	left: auto;
+
+}
+
+.purebackground {
+
+	background-image: url(assets/purebackground.png);
+	background-repeat: repeat;
+
+}
+
+.background-image-center {
+
+	background-position: center;
 
 }
