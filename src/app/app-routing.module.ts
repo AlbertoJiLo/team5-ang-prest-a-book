@@ -10,6 +10,8 @@ import { AdminpanelUsersComponent } from './adminpanel-users/adminpanel-users.co
 import { AdminpanelLoansComponent } from './adminpanel-loans/adminpanel-loans.component';
 import { AdminpanelBooksComponent } from './adminpanel-books/adminpanel-books.component';
 import { BookComponent } from './book/book.component';
+import { BookcreateComponent } from './bookcreate/bookcreate.component';
+import { AuthorcreateComponent } from './authorcreate/authorcreate.component';
 
 const routes: Routes = [
     {
@@ -55,6 +57,10 @@ const routes: Routes = [
     {
         path: 'adminpanel/books',
         component: AdminpanelBooksComponent
+    },
+    {
+        path: 'bookcreate',
+        component: AuthorcreateComponent
     }
 ];
 
