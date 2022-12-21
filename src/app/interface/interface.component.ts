@@ -9,6 +9,7 @@ import { Wishes } from '../models/wishes.model';
 import { Books } from '../models/books.model';
 import { Loans } from '../models/loans.model';
 import {finalize} from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-interface',
@@ -35,7 +36,10 @@ export class InterfaceComponent implements OnInit {
   enviadasLoans?:Loans[];
   recibidasLoans?:Loans[];
   estasSeguro: boolean = false;
-
+  datepipe: DatePipe = new DatePipe('en-US');
+  idBookToTouch: number = 0;
+  idLoanToTouch: number = 0;
+  idWishToTouch: number = 0;
 
   modifyUser: any = {
     username: null,
@@ -60,14 +64,20 @@ export class InterfaceComponent implements OnInit {
 
   }
 
-  deleteWish(id:number | undefined):void{
-    this.estasSeguro = window.confirm
-    ("¿Estás seguro?");
-    if(this.estasSeguro){
-      this.wishesService.delete(id).pipe(finalize( () => this.cargarWishlist())).subscribe();
-    }
-    this.estasSeguro = false;
+  swapBookToTouch(num: number) {
+    this.idBookToTouch = num;
+  }
 
+  swapLoanToTouch(num: number) {
+    this.idLoanToTouch = num;
+  }
+
+  swapWishToTouch(num: number) {
+    this.idWishToTouch = num;
+  }
+
+  deleteWish():void{
+    this.wishesService.delete(this.idWishToTouch).pipe(finalize( () => this.cargarWishlist())).subscribe();
   }
 
   cambiarDatos() {
@@ -80,7 +90,7 @@ export class InterfaceComponent implements OnInit {
   subirDatos() {
     this.user.username = this.modifyUser.username;
     this.user.email = this.modifyUser.email;
-    this.user.birth_date = this.modifyUser.birth;
+    this.user.birth_date = this.modifyUser.birth
     this.user.real_name = this.modifyUser.trueName;
     this.user.surname = this.modifyUser.surname;
     this.user.gender = this.modifyUser.gender;
@@ -107,25 +117,12 @@ export class InterfaceComponent implements OnInit {
     this.wishesService.getByUser(this.user.id).subscribe( result => this.wishlist = result);
   }
 
-  deleteLoan(id_loan:any):void{
-    this.estasSeguro = window.confirm
-    ("¿Estás seguro?");
-    if(this.estasSeguro){
-      this.loansService.delete(id_loan).pipe(finalize( () => this.cargarLoans())).subscribe();
-    }
-    this.estasSeguro = false;
-
-    //this.cargarLoans();
+  deleteLoan():void{
+    this.loansService.delete(this.idLoanToTouch).pipe(finalize( () => this.cargarLoans())).subscribe();
   }
 
-  deleteBook(id_book:any):void{
-    this.estasSeguro = window.confirm
-    ("¿Estás seguro?");
-    if(this.estasSeguro){
-      this.booksService.delete(id_book).pipe(finalize( () => this.cargarBooks())).subscribe();
-    }
-    this.estasSeguro = false;
-
+  deleteBook():void {
+    this.booksService.delete(this.idBookToTouch).pipe(finalize( () => this.cargarBooks())).subscribe();
   }
 
   approveLoan(loan:any):void{
@@ -133,7 +130,7 @@ export class InterfaceComponent implements OnInit {
     date.setMonth(date.getMonth() + 1)
     loan.end_date = date;
     loan.active = true;
-    this.loansService.update(loan.id, loan).pipe(finalize( () => this.cargarLoans())).subscribe();
+    this.loansService.update(loan.id, loan).pipe(finalize(() => this.cargarLoans())).subscribe();
   }
 
   cargarLoans(){
